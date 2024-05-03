@@ -1,0 +1,19 @@
+{
+  "Version": 1,
+  "Hash": "677VQOZ1et1FmvNSO0FF+sH8yMtay58RrFqgfclsUDM=",
+  "Source": "ONE01",
+  "BasePath": "_content/ONE01",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "ONE01\\wwwroot",
+      "Source": "ONE01",
+      "ContentRoot": "D:\\My Projects\\QT01\\ONE01\\ONE01\\wwwroot\\",
+      "BasePath": "_content/ONE01",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": []
+}

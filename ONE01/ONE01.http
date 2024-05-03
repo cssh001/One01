@@ -1,0 +1,6 @@
+@ONE01_HostAddress = http://localhost:5166
+
+GET {{ONE01_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

@@ -1,0 +1,137 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\My Projects\\QT01\\ONE01\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{CF0CDC24-1825-4954-8E12-3AC6E023EFEB}|ONE01\\ONE01.csproj|d:\\my projects\\qt01\\one01\\one01\\enums\\eerrorcode.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CF0CDC24-1825-4954-8E12-3AC6E023EFEB}|ONE01\\ONE01.csproj|solutionrelative:one01\\enums\\eerrorcode.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CF0CDC24-1825-4954-8E12-3AC6E023EFEB}|ONE01\\ONE01.csproj|d:\\my projects\\qt01\\one01\\one01\\controllers\\subcategorycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CF0CDC24-1825-4954-8E12-3AC6E023EFEB}|ONE01\\ONE01.csproj|solutionrelative:one01\\controllers\\subcategorycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CF0CDC24-1825-4954-8E12-3AC6E023EFEB}|ONE01\\ONE01.csproj|d:\\my projects\\qt01\\one01\\one01\\models\\responses\\apiresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CF0CDC24-1825-4954-8E12-3AC6E023EFEB}|ONE01\\ONE01.csproj|solutionrelative:one01\\models\\responses\\apiresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CF0CDC24-1825-4954-8E12-3AC6E023EFEB}|ONE01\\ONE01.csproj|d:\\my projects\\qt01\\one01\\one01\\repositories\\itestrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CF0CDC24-1825-4954-8E12-3AC6E023EFEB}|ONE01\\ONE01.csproj|solutionrelative:one01\\repositories\\itestrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CF0CDC24-1825-4954-8E12-3AC6E023EFEB}|ONE01\\ONE01.csproj|d:\\my projects\\qt01\\one01\\one01\\repositories\\subcategoryrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CF0CDC24-1825-4954-8E12-3AC6E023EFEB}|ONE01\\ONE01.csproj|solutionrelative:one01\\repositories\\subcategoryrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CF0CDC24-1825-4954-8E12-3AC6E023EFEB}|ONE01\\ONE01.csproj|d:\\my projects\\qt01\\one01\\one01\\repositories\\icategoryrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CF0CDC24-1825-4954-8E12-3AC6E023EFEB}|ONE01\\ONE01.csproj|solutionrelative:one01\\repositories\\icategoryrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CF0CDC24-1825-4954-8E12-3AC6E023EFEB}|ONE01\\ONE01.csproj|d:\\my projects\\qt01\\one01\\one01\\repositories\\categoryrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CF0CDC24-1825-4954-8E12-3AC6E023EFEB}|ONE01\\ONE01.csproj|solutionrelative:one01\\repositories\\categoryrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 2,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ApiResponse.cs",
+              "DocumentMoniker": "D:\\My Projects\\QT01\\ONE01\\ONE01\\Models\\Responses\\ApiResponse.cs",
+              "RelativeDocumentMoniker": "ONE01\\Models\\Responses\\ApiResponse.cs",
+              "ToolTip": "D:\\My Projects\\QT01\\ONE01\\ONE01\\Models\\Responses\\ApiResponse.cs",
+              "RelativeToolTip": "ONE01\\Models\\Responses\\ApiResponse.cs",
+              "ViewState": "AQIAAAEAAAAAAAAAAAAAAAcAAAA5AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-02T20:27:35.421Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "EErrorCode.cs",
+              "DocumentMoniker": "D:\\My Projects\\QT01\\ONE01\\ONE01\\Enums\\EErrorCode.cs",
+              "RelativeDocumentMoniker": "ONE01\\Enums\\EErrorCode.cs",
+              "ToolTip": "D:\\My Projects\\QT01\\ONE01\\ONE01\\Enums\\EErrorCode.cs",
+              "RelativeToolTip": "ONE01\\Enums\\EErrorCode.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-02T20:13:46.185Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "SubCategoryRepository.cs",
+              "DocumentMoniker": "D:\\My Projects\\QT01\\ONE01\\ONE01\\Repositories\\SubCategoryRepository.cs",
+              "RelativeDocumentMoniker": "ONE01\\Repositories\\SubCategoryRepository.cs",
+              "ToolTip": "D:\\My Projects\\QT01\\ONE01\\ONE01\\Repositories\\SubCategoryRepository.cs",
+              "RelativeToolTip": "ONE01\\Repositories\\SubCategoryRepository.cs",
+              "ViewState": "AQIAABUAAAAAAAAAAAAAABwAAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-02T20:02:13.976Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "ITestRepository.cs",
+              "DocumentMoniker": "D:\\My Projects\\QT01\\ONE01\\ONE01\\Repositories\\ITestRepository.cs",
+              "RelativeDocumentMoniker": "ONE01\\Repositories\\ITestRepository.cs",
+              "ToolTip": "D:\\My Projects\\QT01\\ONE01\\ONE01\\Repositories\\ITestRepository.cs",
+              "RelativeToolTip": "ONE01\\Repositories\\ITestRepository.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAAyAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-02T20:00:42.265Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "SubCategoryController.cs",
+              "DocumentMoniker": "D:\\My Projects\\QT01\\ONE01\\ONE01\\Controllers\\SubCategoryController.cs",
+              "RelativeDocumentMoniker": "ONE01\\Controllers\\SubCategoryController.cs",
+              "ToolTip": "D:\\My Projects\\QT01\\ONE01\\ONE01\\Controllers\\SubCategoryController.cs",
+              "RelativeToolTip": "ONE01\\Controllers\\SubCategoryController.cs",
+              "ViewState": "AQIAAAwAAAAAAAAAAAAAwBsAAAA+AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-02T18:44:24.269Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "ICategoryRepository.cs",
+              "DocumentMoniker": "D:\\My Projects\\QT01\\ONE01\\ONE01\\Repositories\\ICategoryRepository.cs",
+              "RelativeDocumentMoniker": "ONE01\\Repositories\\ICategoryRepository.cs",
+              "ToolTip": "D:\\My Projects\\QT01\\ONE01\\ONE01\\Repositories\\ICategoryRepository.cs",
+              "RelativeToolTip": "ONE01\\Repositories\\ICategoryRepository.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-02T18:41:08.373Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "CategoryRepository.cs",
+              "DocumentMoniker": "D:\\My Projects\\QT01\\ONE01\\ONE01\\Repositories\\CategoryRepository.cs",
+              "RelativeDocumentMoniker": "ONE01\\Repositories\\CategoryRepository.cs",
+              "ToolTip": "D:\\My Projects\\QT01\\ONE01\\ONE01\\Repositories\\CategoryRepository.cs",
+              "RelativeToolTip": "ONE01\\Repositories\\CategoryRepository.cs",
+              "ViewState": "AQIAAAwAAAAAAAAAAAAAAB4AAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-02T18:40:05.738Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\ONE01.props" />
+</Project>
