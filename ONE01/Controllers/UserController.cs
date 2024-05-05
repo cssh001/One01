@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using ONE01.Context;
 using ONE01.Models.Responses;
-using ONE01.Repositories;
+using ONE01.Repositories.Interfaces;
 using System.Data;
 
 namespace ONE01.Controllers

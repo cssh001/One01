@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using ONE01.Context;
 using ONE01.Models;
 using ONE01.Repositories.Interfaces;
+using System.Data;
 
 namespace ONE01.Repositories
 {
@@ -13,22 +14,38 @@ namespace ONE01.Repositories
             _context = context;
         }
 
-        public Task CreateSubCategoryAsync(SubCategory subCategory)
+        public async Task CreateSubCategoryAsync(SubCategory subCategory)
         {
-            throw new NotImplementedException();
+            var connection = _context.CreateConnection();
+            var query = "[DB01].[dbo].[CreateNewSubCategoryProcedure]";
+            var param = new
+            {
+                subCategory.CategoryId,
+                subCategory.SubCategoryName,
+                subCategory.Image,
+                subCategory.Description,
+            };
+            await connection.ExecuteAsync(query, param, commandType: CommandType.StoredProcedure);
         }
+
         public async Task<IEnumerable<SubCategory>>  GetAllSubCategory()
         {
            using var connetion = _context.CreateConnection();
-            const string query = "SELECT * FROM [DB01].[dbo].[SubCategories]";
+            const string query = @"SELECT [Id], [CategoryId], [SubCategoryName], [Image], [Description] 
+                                   FROM [DB01].[dbo].[SubCategories] 
+                                   ORDER BY [ID] DESC";
              return await connetion.QueryAsync<SubCategory>(query);
                  
         }
 
-        public async Task<IEnumerable<SubCategory>> GetSubCategoryByIdAsync(int id)
-        {
-            throw new NotImplementedException();
-
+       public async Task<IEnumerable<SubCategory>> GetSubCategoryByIdAsync(int id)
+       {
+            using var connection = _context.CreateConnection();
+            var param = new { Id = id };
+            const string query = @"SELECT [Id], [CategoryId], [SubCategoryName], [Image], [Description] 
+                                   FROM [DB01].[dbo].[SubCategories] 
+                                   WHERE [Id] = @Id";
+            return await connection.QueryAsync<SubCategory>(query, param);
         }
 
         public Task UpdateSubCategoryAsync(int Id, SubCategory subCategory)

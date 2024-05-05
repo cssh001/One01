@@ -1,6 +1,6 @@
 ﻿using ONE01.Models.Responses;
 
-namespace ONE01.Repositories
+namespace ONE01.Repositories.Interfaces
 {
     public interface ITestRepository
     {

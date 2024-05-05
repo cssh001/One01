@@ -11,6 +11,6 @@
         public string? Image { get; set; }  
         public string Options { get; set; }
         public int CorrectAnswer { get; set; }  
-        public bool Answered { get; set; }
+      
     }
 }

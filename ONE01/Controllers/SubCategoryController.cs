@@ -29,16 +29,47 @@ namespace ONE01.Controllers
 
             var apiResponse = new ApiResponse<SubCategory>()
             {
-                MyErrorCode = EErrorCode.Success,
+                ErrorCode = EErrorCode.Success,
                 Total = response.Count(),
                 Data = response.ToList(),
-                ErrorMessage = "Success",
+                Message = "Success",
 
             };
 
             return new OkObjectResult(apiResponse);
 
         }
-       
+
+        [HttpPost]
+        public async Task<IActionResult> CreateSubCategory(SubCategory subCategory)
+        {
+            await _repository.CreateSubCategoryAsync(subCategory);
+            var response = new ApiCreateResponse()
+            {
+                Message = "Create New Data Successfully",
+                ErrorCode = EErrorCode.Success,
+            };
+
+            return Ok(response);
+        }
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetSubCategoryById(int id)
+        {
+            try
+            {
+                var subCategory = await _repository.GetSubCategoryByIdAsync(id);
+                if (subCategory == null)
+                {
+                    return NotFound(); 
+                }
+                return Ok(subCategory);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"An error occurred: {ex.Message}");
+                return StatusCode(500); 
+            }
+        }
+
     }
 }

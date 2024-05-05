@@ -42,7 +42,7 @@ namespace ONE01.Controllers
             try
             {
                 using var connection = _context.CreateConnection();
-                const string query = "SELECT * FROM [DB01].[dbo].[Category_List]";
+                const string query = "SELECT [CategoryId], [CategoryName], [Description], [Image] FROM [DB01].[dbo].[Category_List] ORDER BY [CategoryId] DESC";
                 var categories = await connection.QueryAsync<Category>(query);
                 return Ok(categories);
             }
@@ -82,7 +82,7 @@ namespace ONE01.Controllers
                 };
                 const string query = "EXEC [dbo].[UpdateCategoryProcedure] @CategoryId, @CategoryName, @Description";
                 var categories = await connection.QueryAsync<Category>(query, param);
-                return Ok(categories);
+                return Ok(new {Message= "Category Updated Successfully"});
             }
             catch (Exception ex)
             {
@@ -90,7 +90,7 @@ namespace ONE01.Controllers
             }
         }
 
-        [HttpPut]
+        [HttpDelete("{categoryId}")]
         public async Task<IActionResult> DeleteCategory(int categoryId)
         {
             using var connection = _context.CreateConnection();

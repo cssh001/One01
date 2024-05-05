@@ -1,6 +1,7 @@
 ﻿using Dapper;
 using ONE01.Context;
 using ONE01.Models.Responses;
+using ONE01.Repositories.Interfaces;
 using System;
 using System.Threading.Tasks;
 

@@ -1,25 +1,6 @@
-CREATE TABLE QuizQuestions (
-    Id INT PRIMARY KEY IDENTITY(1,1),
-    CategoryId INT,
-    UserId INT,
-    GameName NVARCHAR(255),
-    Title NVARCHAR(255),
-    Question NVARCHAR(MAX) NOT NULL,
-    Image NVARCHAR(255),
-    Options NVARCHAR(MAX) NOT NULL,
-    CorrectAnswer INT NOT NULL,
-    Answered BIT
-);
-
-INSERT INTO [dbo].[QuizQuestions] (CategoryId, UserId, GameName, Title, Question, Image, Options, CorrectAnswer, Answered)
-VALUES 
-(2, 1, 'Game2', 'Title 2', 'Question 2', NULL, '["a","b","c","d"]', 2, 0)
-
-
-SELECT * FROM [dbo].[QuizQuestions];
 
 ------ Create store procedure for GameQuiz
-CREATE PROCEDURE QuizQuestionProcedure
+CREATE PROC QuizQuestionProcedure
     @Operation VARCHAR(5),  -- 'C' for Create, 'R' for Read, 'U' for Update, 'D' for Delete
     @Id INT = NULL,
     @CategoryId INT = NULL,

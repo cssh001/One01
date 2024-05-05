@@ -1,18 +1,60 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using ONE01.Context;
 using ONE01.Models.Requests;
-using ONE01.Repositories;
-using System.Data;
-using Dapper;
 using ONE01.Models.Responses;
+using ONE01.Repositories;
+using ONE01.Repositories.Interfaces;
 
 namespace ONE01.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class QuizController(DapperContext context) : Controller, IQuizRepository
+    public class QuizController : ControllerBase
     {
-        [HttpGet()]
+        private readonly IQuizRepository _quizRepository;
+
+        public QuizController(IQuizRepository quizRepository)
+        {
+            _quizRepository = quizRepository;
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetAllQuiz()
+        {
+            try
+            {
+                var response = await _quizRepository.GetAllQuiz();
+                var apiResponse = new ApiResponse<QuizResponse>()
+                {
+                   ErrorCode = Enums.EErrorCode.Success,
+                   Message = "Success",
+                   Total = response.Count,
+                   Data = response,
+                };
+                return Ok(apiResponse); 
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"An error occurred: {ex.Message}");
+                return StatusCode(500);
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateNewQuiz(GameQuiz gameQuiz)
+        {
+            try
+            {
+                await _quizRepository.CreateNewQuiz(gameQuiz);
+                return Ok("Quiz created successfully"); 
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"An error occurred: {ex.Message}");
+                return StatusCode(500); 
+            }
+        }
+
+        /*[HttpGet()]
         public async Task<IEnumerable<QuizResponse>> GetAllQuiz()
         {
             try
@@ -83,6 +125,8 @@ namespace ONE01.Controllers
             {
                 return StatusCode(500, $"An error occurred: {ex.Message}");
             }
-        }
+        }*/
+
+
     }
 }
