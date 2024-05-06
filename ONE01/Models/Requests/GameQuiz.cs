@@ -4,6 +4,7 @@
     {
         public int QuizId { get; set; }
         public int? CategoryId { get; set; }
+        public int SubCategoryId { get; set; }
         public int? UserId { get; set; }
         public string? GameName { get; set; }
         public string Title { get; set; } 

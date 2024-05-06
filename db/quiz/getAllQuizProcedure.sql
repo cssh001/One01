@@ -14,5 +14,5 @@ AS BEGIN
     FROM
         [dbo].[QuizQuestions] quiz
         RIGHT JOIN [dbo].[Categories] cat ON quiz.[CategoryId] = cat.[Id]
-		ORDER BY quiz.[Id] DESC
+    ORDER BY quiz.[Id] DESC
 END;

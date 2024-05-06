@@ -18,6 +18,7 @@ namespace ONE01.Repositories
                 var param = new
                 {
                     gameIQ.CategoryId,
+                    gameIQ.SubCategoryId,
                     gameIQ.UserId,
                     gameIQ.GameName,
                     gameIQ.Title,

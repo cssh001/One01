@@ -1,9 +1,7 @@
-﻿using Dapper;
-using Microsoft.AspNetCore.Http.HttpResults;
-using Microsoft.AspNetCore.Mvc;
-using ONE01.Context;
+﻿using Microsoft.AspNetCore.Mvc;
+using ONE01.Enums;
 using ONE01.Models.Responses;
-using ONE01.Repositories;
+using ONE01.Repositories.Interfaces;
 
 namespace ONE01.Controllers
 {
@@ -11,95 +9,126 @@ namespace ONE01.Controllers
     [ApiController]
     public class CategoryController : ControllerBase
     {
-        private readonly DapperContext _context;
 
-        public CategoryController(DapperContext context)
+        private readonly ICategoryRepository _categoryRepository;
+        public CategoryController(ICategoryRepository categoryRepository)
         {
-            _context = context;
+            _categoryRepository = categoryRepository;
+        }
+
+
+        [HttpGet]
+        public IActionResult GetAllCategories()
+        {
+            try
+            {
+                var categories = _categoryRepository.GetAllCategories();
+
+                if (categories == null)
+                {
+                    var apiResponse = new ApiResponse<Category>()
+                    {
+                        ErrorCode = EErrorCode.NotFound,
+                        Message = "Categories not found",
+                        Total = 0,
+                        Data = null,
+                    };
+                    return NotFound(apiResponse);
+                }
+                else
+                {
+                    var apiResponse = new ApiResponse<Category>()
+                    {
+                        ErrorCode = EErrorCode.Success,
+                        Message = "Success",
+                        Total = categories.Count,
+                        Data = categories
+                    };
+                    return Ok(apiResponse);
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode((int)EErrorCode.ServerError, "Server Error");
+            }
+        }
+
+
+        [HttpGet("{Id}")]
+        public IActionResult GetCategoryById(int Id)
+        {
+            try
+            {
+                var categories = _categoryRepository.GetCategoryById(Id);
+
+                if (categories == null)
+                {
+                    var apiResponse = new ApiResponse<Category>()
+                    {
+                        ErrorCode = EErrorCode.NotFound,
+                        Message = "Categories not found",
+                        Total = 0,
+                        Data = null,
+                    };
+                    return NotFound(apiResponse);
+                }
+                else
+                {
+                    var apiResponse = new ApiResponse<Category>()
+                    {
+                        ErrorCode = EErrorCode.Success,
+                        Message = "Success",
+                        Total = categories.Count,
+                        Data = categories
+                    };
+                    return Ok(apiResponse);
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode((int)EErrorCode.ServerError, "Server Error");
+            }
         }
 
         [HttpPost]
         public async Task<IActionResult> CreateNewCategory(Category category)
         {
-            using var connection = _context.CreateConnection();
-            var param = new { CategoryName = category.CategoryName, Description = category.Description };
-            const string query = "INSERT INTO [DB01].[dbo].[Categories] (CategoryName, Description) VALUES (@CategoryName, @Description)";
-
             try
             {
-                await connection.ExecuteAsync(query, param);
-                return Ok("Create New Successful");
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, "An error occurred while creating the category." + ex);
-            }
-        }
-
-        [HttpGet]
-        public async Task<IActionResult> GetAllCategories()
-        {
-            try
-            {
-                using var connection = _context.CreateConnection();
-                const string query = "SELECT [CategoryId], [CategoryName], [Description], [Image] FROM [DB01].[dbo].[Category_List] ORDER BY [CategoryId] DESC";
-                var categories = await connection.QueryAsync<Category>(query);
-                return Ok(categories);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }
-
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetCategoryById(int id)
-        {
-            try
-            {
-                using var connection = _context.CreateConnection();
-                var param = new { Id = id };
-                const string query = $"SELECT [Id] as CategoryId, [CategoryName], [Description] FROM [DB01].[dbo].[Categories] WHERE [Id] = @Id";
-                var categories = await connection.QuerySingleOrDefaultAsync<Category>(query, param);
-                return Ok(categories);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }
-        [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateCategory(int id, Category category)
-        {
-            try
-            {
-                using var connection = _context.CreateConnection();
-                var param = new
+               await _categoryRepository.CreateCategory(category);
+                var apiResponse = new ApiCreateResponse()
                 {
-                    CategoryId = id,
-                    category.CategoryName,
-                    category.Description
+                    ErrorCode = EErrorCode.Success,
+                    Message = "Category created successfully"
                 };
-                const string query = "EXEC [dbo].[UpdateCategoryProcedure] @CategoryId, @CategoryName, @Description";
-                var categories = await connection.QueryAsync<Category>(query, param);
-                return Ok(new {Message= "Category Updated Successfully"});
+                return Ok(apiResponse);
+
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.Message);
+                return StatusCode((int)EErrorCode.ServerError, $"Server error with {ex}");
             }
         }
 
-        [HttpDelete("{categoryId}")]
-        public async Task<IActionResult> DeleteCategory(int categoryId)
+        [HttpPut("{Id}")]
+        public async Task<IActionResult> UpdateCategory(int Id, Category category)
         {
-            using var connection = _context.CreateConnection();
-            var param  = new { CategoryId =  categoryId };
-            const string query = $"DELETE FROM [DB01].[dbo].[Categories] WHERE Id = @CategoryId";
-            var categories = await connection.QueryAsync<Category>(query, param);
-            return Ok(categories);
-        }
+            try
+            {
+                await _categoryRepository.UpdateCategory(Id, category);
+                var apiResponse = new ApiCreateResponse()
+                {
+                    ErrorCode = EErrorCode.Success,
+                    Message = "Category updated successfully"
+                };
+                return Ok(apiResponse);
 
+            }
+            catch (Exception ex)
+            {
+                return StatusCode((int)EErrorCode.ServerError, $"Server error with {ex}");
+            }
+        }
 
     }
 }
