@@ -1,7 +1,7 @@
 ﻿
 using Azure;
 using Microsoft.AspNetCore.Mvc;
-using ONE01.Models.Responses;
+using ONE01.Models;
 using ONE01.Repositories.Interfaces;
 using System;
 using System.Threading.Tasks;

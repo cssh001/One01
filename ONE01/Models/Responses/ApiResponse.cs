@@ -7,6 +7,6 @@ namespace ONE01.Models.Responses
         public required EErrorCode ErrorCode { get; set; }
         public required string Message { get; set; }
         public int? Total {  get; set; }
-        public List<T>? Data { get; set; }
+        public required List<T> Data { get; set; }
     }
 }

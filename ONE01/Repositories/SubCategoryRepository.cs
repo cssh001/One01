@@ -28,14 +28,12 @@ namespace ONE01.Repositories
             await connection.ExecuteAsync(query, param, commandType: CommandType.StoredProcedure);
         }
 
-        public async Task<IEnumerable<SubCategory>>  GetAllSubCategory()
+        public async Task<List<SubCategory>>  GetAllSubCategory()
         {
            using var connetion = _context.CreateConnection();
-            const string query = @"SELECT [Id], [CategoryId], [SubCategoryName], [Image], [Description] 
-                                   FROM [DB01].[dbo].[SubCategories] 
-                                   ORDER BY [ID] DESC";
-             return await connetion.QueryAsync<SubCategory>(query);
-                 
+            const string proc = "[DB01].[dbo].[GetAllSubCategoriesProcedure]";
+             var result =  await connetion.QueryAsync<SubCategory>(proc, null, commandType: CommandType.StoredProcedure); ;
+            return result.ToList(); 
         }
 
        public async Task<IEnumerable<SubCategory>> GetSubCategoryByIdAsync(int id)
@@ -48,9 +46,29 @@ namespace ONE01.Repositories
             return await connection.QueryAsync<SubCategory>(query, param);
         }
 
-        public Task UpdateSubCategoryAsync(int Id, SubCategory subCategory)
+        public async Task UpdateSubCategory(int Id, SubCategory subCategory)
         {
-            throw new NotImplementedException();
+            try
+            {
+                using (var connection = _context.CreateConnection())
+                {
+                    var query = "[DB01].[dbo].[UpdateSubCategoryProcedure]";
+                    var param = new
+                    {
+                        Id,
+                        subCategory.CategoryId,
+                        subCategory.SubCategoryName,
+                        subCategory.Image,
+                        subCategory.Description
+                    };
+                    await connection.ExecuteAsync(query, param, commandType: CommandType.StoredProcedure);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"An error occurred: {ex.Message}");
+                throw; 
+            }
         }
     }
 }

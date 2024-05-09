@@ -1,11 +1,11 @@
-CREATE PROCEDURE [dbo].[UpdateQuizProcedure]
+ALTER PROCEDURE [dbo].[UpdateQuizProcedure]
     @QuizId INT,
-    @CategoryId INT = NULL,
-    @UserId INT = NULL,
-    @GameName NVARCHAR(255) = NULL,
+    @CategoryId INT ,
+    @SubCategoryId INT ,
+    @GameName NVARCHAR(255),
     @Title NVARCHAR(255),
     @Question NVARCHAR(MAX),
-    @Image NVARCHAR(255) = NULL,
+    @Image NVARCHAR(255),
     @Options NVARCHAR(MAX),
     @CorrectAnswer INT
 AS
@@ -13,7 +13,7 @@ BEGIN
     UPDATE [dbo].[QuizQuestions]
     SET
         [CategoryId] = @CategoryId,
-        [UserId] = @UserId,
+        [SubCategoryId] = @SubCategoryId,
         [GameName] = @GameName,
         [Title] = @Title,
         [Question] = @Question,

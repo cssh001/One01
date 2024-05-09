@@ -1,12 +1,14 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using ONE01.Models;
 using ONE01.Models.Requests;
-using ONE01.Models.Responses;
 
 namespace ONE01.Repositories.Interfaces
 {
     public interface IQuizRepository
     {
-        Task<List<QuizResponse>> GetAllQuiz();
+        Task<List<Quiz>> GetAllQuiz();
+        Task<List<Quiz>> GetQuizById(int Id);
         Task CreateNewQuiz(GameQuiz quiz);
+        Task<bool> UpdateQuiz (int Id, GameQuiz quiz);
     }
 }

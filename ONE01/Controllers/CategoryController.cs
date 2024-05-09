@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ONE01.Enums;
+using ONE01.Models;
 using ONE01.Models.Responses;
+using ONE01.Repositories;
 using ONE01.Repositories.Interfaces;
 
 namespace ONE01.Controllers
@@ -9,8 +11,9 @@ namespace ONE01.Controllers
     [ApiController]
     public class CategoryController : ControllerBase
     {
-
+        private static List<Category> _categoriesList = [];
         private readonly ICategoryRepository _categoryRepository;
+
         public CategoryController(ICategoryRepository categoryRepository)
         {
             _categoryRepository = categoryRepository;
@@ -18,38 +21,24 @@ namespace ONE01.Controllers
 
 
         [HttpGet]
-        public IActionResult GetAllCategories()
+        public async Task<IActionResult> GetAllCategories()
         {
             try
             {
-                var categories = _categoryRepository.GetAllCategories();
-
-                if (categories == null)
+                _categoriesList = await _categoryRepository.GetAllCategories();
+                return Ok(new ApiResponse<Category>()
                 {
-                    var apiResponse = new ApiResponse<Category>()
-                    {
-                        ErrorCode = EErrorCode.NotFound,
-                        Message = "Categories not found",
-                        Total = 0,
-                        Data = null,
-                    };
-                    return NotFound(apiResponse);
+                    Data = _categoriesList,
+                    Total = _categoriesList.Count,
+                    ErrorCode = EErrorCode.Success,
+                    Message = "Success",
                 }
-                else
-                {
-                    var apiResponse = new ApiResponse<Category>()
-                    {
-                        ErrorCode = EErrorCode.Success,
-                        Message = "Success",
-                        Total = categories.Count,
-                        Data = categories
-                    };
-                    return Ok(apiResponse);
-                }
+                );
             }
             catch (Exception ex)
             {
-                return StatusCode((int)EErrorCode.ServerError, "Server Error");
+                Console.WriteLine($"An error occurred: {ex.Message}");
+                return StatusCode(500);
             }
         }
 
@@ -68,7 +57,7 @@ namespace ONE01.Controllers
                         ErrorCode = EErrorCode.NotFound,
                         Message = "Categories not found",
                         Total = 0,
-                        Data = null,
+                        Data = [],
                     };
                     return NotFound(apiResponse);
                 }

@@ -1,4 +1,4 @@
-﻿using ONE01.Models.Responses;
+﻿using ONE01.Models;
 
 namespace ONE01.Repositories.Interfaces
 {

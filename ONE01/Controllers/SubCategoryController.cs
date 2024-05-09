@@ -14,9 +14,9 @@ namespace ONE01.Controllers
     [Route("api/[controller]")]
     public class SubCategoryController: ControllerBase
     {
-        
+        private static List<SubCategory> _subCategoriesList = [];
+        private readonly ISubCategoryRepository _repository;
 
-       private readonly ISubCategoryRepository _repository;
         public SubCategoryController(ISubCategoryRepository repository)
         {
             _repository = repository;
@@ -25,19 +25,17 @@ namespace ONE01.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAllSubCategories()
         {
-            var response = await _repository.GetAllSubCategory();
+            _subCategoriesList = await _repository.GetAllSubCategory();
 
             var apiResponse = new ApiResponse<SubCategory>()
             {
                 ErrorCode = EErrorCode.Success,
-                Total = response.Count(),
-                Data = response.ToList(),
+                Total = _subCategoriesList.Count,
+                Data = _subCategoriesList,
                 Message = "Success",
 
             };
-
             return new OkObjectResult(apiResponse);
-
         }
 
         [HttpPost]
@@ -69,6 +67,19 @@ namespace ONE01.Controllers
                 Console.WriteLine($"An error occurred: {ex.Message}");
                 return StatusCode(500); 
             }
+        }
+
+        [HttpPut("{Id}")]
+        public async Task<IActionResult> UpdateSubCategory(int Id,  SubCategory subCategory)
+        {
+            await _repository.UpdateSubCategory(Id, subCategory);
+            var response = new ApiCreateResponse()
+            {
+                Message = "Updated Successfully",
+                ErrorCode = EErrorCode.Success,
+            };
+
+            return Ok(response);
         }
 
     }

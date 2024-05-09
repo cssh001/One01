@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Mvc;
+using ONE01.Enums;
+using ONE01.Models;
 using ONE01.Models.Requests;
 using ONE01.Models.Responses;
-using ONE01.Repositories;
 using ONE01.Repositories.Interfaces;
 
 namespace ONE01.Controllers
@@ -10,6 +12,8 @@ namespace ONE01.Controllers
     [ApiController]
     public class QuizController : ControllerBase
     {
+        private static List<Quiz> _quizList = [];
+
         private readonly IQuizRepository _quizRepository;
 
         public QuizController(IQuizRepository quizRepository)
@@ -22,21 +26,39 @@ namespace ONE01.Controllers
         {
             try
             {
-                var response = await _quizRepository.GetAllQuiz();
-                var apiResponse = new ApiResponse<QuizResponse>()
-                {
-                   ErrorCode = Enums.EErrorCode.Success,
-                   Message = "Success",
-                   Total = response.Count,
-                   Data = response,
-                };
-                return Ok(apiResponse); 
+                _quizList = await _quizRepository.GetAllQuiz();
+                return Ok(new ApiResponse<Quiz>() { 
+                    ErrorCode = EErrorCode.Success,
+                    Message = "Succuess",
+                    Total = _quizList.Count,
+                    Data = _quizList,
+                });
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"An error occurred: {ex.Message}");
                 return StatusCode(500);
             }
+        }
+        [HttpGet("{Id}")]
+        public async Task<IActionResult> GetQuizById(int Id)
+        {
+            var project = _quizList.Find(p => p.QuizId == Id);
+            if (project == null)
+            {
+                return NotFound(new ApiResponse<Quiz>
+                {
+                    ErrorCode = EErrorCode.NotFound,
+                    Message = "Project not found",
+                    Data = [],
+                });
+            }
+            return Ok(new ApiResponse<Quiz>
+            {
+                ErrorCode = EErrorCode.NotFound,
+                Message = "Success",
+                Data = _quizList,
+            });
         }
 
         [HttpPost]
@@ -45,7 +67,11 @@ namespace ONE01.Controllers
             try
             {
                 await _quizRepository.CreateNewQuiz(gameQuiz);
-                return Ok("Quiz created successfully"); 
+                return Ok(new ApiCreateResponse()
+                {
+                    ErrorCode = EErrorCode.Success,
+                    Message = "Created Successfully",
+                });
             }
             catch (Exception ex)
             {
@@ -53,80 +79,34 @@ namespace ONE01.Controllers
                 return StatusCode(500); 
             }
         }
-
-        /*[HttpGet()]
-        public async Task<IEnumerable<QuizResponse>> GetAllQuiz()
+        [HttpPut("{Id}")]
+        public async Task<IActionResult> UpdateQuiz(int Id, GameQuiz gameQuiz)
         {
             try
             {
-                using var connection = context.CreateConnection();
-                const string proc = "GetAllQuizzes";
-                var response = await connection.QueryAsync<QuizResponse>(proc, param: null, commandType: CommandType.StoredProcedure);
-                return response.ToList();
-            }
-            catch (Exception ex)
-            { 
-                Console.WriteLine($"An error occurred: {ex.Message}");
-                throw;
-            }
-        }
-
-        // Create new game 
-        [HttpPost()]
-        public async Task<ActionResult> AddNewGameQuiz(GameQuiz gameIQ)
-        {
-            try
-            {
-                using var connection = context.CreateConnection();
-                var proc = "[DB01].[dbo].[CreateNewQuizProcedure]";
-                var param = new
+                var success = await _quizRepository.UpdateQuiz(Id, gameQuiz);
+                if (success)
                 {
-                    gameIQ.CategoryId,
-                    gameIQ.UserId,
-                    gameIQ.GameName,
-                    gameIQ.Title,
-                    gameIQ.Question,
-                    gameIQ.Image,
-                    gameIQ.Options,
-                    gameIQ.CorrectAnswer,
-                    gameIQ.Answered
-                };
-
-                var response = await connection.ExecuteAsync(proc, param, commandType: CommandType.StoredProcedure);
-
-                return Ok($"New quiz created successfully with CategoryId: {gameIQ.CategoryId} and Question: {gameIQ.Question}");
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, $"An error occurred: {ex.Message}");
-            }
-        }
-
-        // Delete game 
-        [HttpDelete("{Id}")]
-        public async Task<IActionResult> DeleteGameQuiz(int Id)
-        {
-            try
-            {
-                using var connection = context.CreateConnection();
-                var param = new {Id};
-                var query = "[DB01].[dbo].[DeleteQuizProcedure]";
-                var response = await connection.ExecuteAsync(query, param, commandType: CommandType.StoredProcedure);
-                if (response > 0)
-                {
-                    return Ok("Quiz deleted successfully.");
+                    return Ok(new ApiCreateResponse
+                    {
+                        ErrorCode = EErrorCode.Success,
+                        Message = "Updated Successfully",
+                    });
                 }
                 else
                 {
-                    return NotFound("Quiz not found or could not be deleted.");
+                    return NotFound(new ApiCreateResponse
+                    {
+                        ErrorCode = EErrorCode.NotFound,
+                        Message = "Quiz not found",
+                    });
                 }
             }
             catch (Exception ex)
             {
-                return StatusCode(500, $"An error occurred: {ex.Message}");
+                Console.WriteLine($"An error occurred: {ex.Message}");
+                return StatusCode(500);
             }
-        }*/
-
-
+        }
     }
 }
