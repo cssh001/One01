@@ -64,7 +64,7 @@
               "RelativeDocumentMoniker": "ONE01\\Controllers\\QuizController.cs",
               "ToolTip": "D:\\My Projects\\QT01\\ONE01\\ONE01\\Controllers\\QuizController.cs",
               "RelativeToolTip": "ONE01\\Controllers\\QuizController.cs",
-              "ViewState": "AQIAAAkAAAAAAAAAAAAAABkAAAAJAAAA",
+              "ViewState": "AQIAABgAAAAAAAAAAAAAACwAAAAJAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-05-09T17:46:53.97Z",
               "EditorCaption": ""
@@ -79,8 +79,7 @@
               "RelativeToolTip": "ONE01\\Repositories\\TestRepository.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-09T17:46:05.755Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-09T17:46:05.755Z"
             },
             {
               "$type": "Document",
@@ -92,8 +91,7 @@
               "RelativeToolTip": "ONE01\\Repositories\\SubCategoryRepository.cs",
               "ViewState": "AQIAACoAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-09T17:46:00.985Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-09T17:46:00.985Z"
             },
             {
               "$type": "Document",
@@ -105,8 +103,7 @@
               "RelativeToolTip": "ONE01\\Repositories\\CategoryRepository.cs",
               "ViewState": "AQIAADYAAAAAAAAAAAAAAEgAAABGAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-09T05:43:32.254Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-09T05:43:32.254Z"
             },
             {
               "$type": "Document",
@@ -118,8 +115,7 @@
               "RelativeToolTip": "ONE01\\Controllers\\CategoryController.cs",
               "ViewState": "AQIAAD0AAAAAAAAAAAD4v0sAAAAdAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-09T05:42:35.991Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-09T05:42:35.991Z"
             },
             {
               "$type": "Document",
@@ -155,8 +151,7 @@
               "RelativeToolTip": "ONE01\\Repositories\\QuizRepository.cs",
               "ViewState": "AQIAAEsAAAAAAAAAAAAAAFoAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-08T16:11:01.22Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-08T16:11:01.22Z"
             },
             {
               "$type": "Document",
