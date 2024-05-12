@@ -27,7 +27,7 @@ namespace ONE01.Controllers
             try
             {
                 _quizList = await _quizRepository.GetAllQuiz();
-                return Ok(new ApiResponse<Quiz>() { 
+                return Ok(new ApiResponse<List<Quiz>>() { 
                     ErrorCode = EErrorCode.Success,
                     Message = "Succuess",
                     Total = _quizList.Count,
@@ -41,24 +41,24 @@ namespace ONE01.Controllers
             }
         }
         [HttpGet("{Id}")]
-        public async Task<IActionResult> GetQuizById(int Id)
+        public Task<IActionResult> GetQuizById(int Id)
         {
             var project = _quizList.Find(p => p.QuizId == Id);
             if (project == null)
             {
-                return NotFound(new ApiResponse<Quiz>
+                return Task.FromResult<IActionResult>(NotFound(new ApiResponse<EmptyResult>
                 {
                     ErrorCode = EErrorCode.NotFound,
                     Message = "Project not found",
-                    Data = [],
-                });
+                    Data = null,
+                }));
             }
-            return Ok(new ApiResponse<Quiz>
+            return Task.FromResult<IActionResult>(Ok(new ApiResponse<List<Quiz>>
             {
                 ErrorCode = EErrorCode.NotFound,
                 Message = "Success",
                 Data = _quizList,
-            });
+            }));
         }
 
         [HttpPost]
@@ -106,6 +106,45 @@ namespace ONE01.Controllers
             {
                 Console.WriteLine($"An error occurred: {ex.Message}");
                 return StatusCode(500);
+            }
+        }
+
+        [HttpDelete("{Id}")]
+        public async Task<IActionResult> DeleteQuiz(int Id)
+        {
+            try
+            {
+                var isDeleted = await _quizRepository.DeleteQuiz(Id);
+
+                if (isDeleted)
+                {
+                    return Ok(new ApiResponse<EmptyResult>()
+                    {
+                        Message = "Deleted successfully",
+                        ErrorCode = EErrorCode.Success,
+                        Total = null,
+                        Data = Empty,
+                    });
+                }
+                else
+                {
+                    return NotFound(new ApiResponse<int>()
+                    {
+                        Message = $"Quiz with Id {Id} not found",
+                        ErrorCode = EErrorCode.NotFound,
+                        Data = Id,
+                    });
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"An error occurred: {ex.Message}");
+                return StatusCode(500, new ApiResponse<string>()
+                {
+                    Message = "An error occurred while deleting the quiz",
+                    ErrorCode = EErrorCode.ServerError,
+                    Data = ex.Message,
+                });
             }
         }
     }

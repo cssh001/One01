@@ -28,6 +28,7 @@ namespace ONE01.Repositories
             await connection.ExecuteAsync(query, param, commandType: CommandType.StoredProcedure);
         }
 
+       
         public async Task<List<SubCategory>>  GetAllSubCategory()
         {
            using var connetion = _context.CreateConnection();
@@ -70,5 +71,23 @@ namespace ONE01.Repositories
                 throw; 
             }
         }
+        public async Task<bool> DeleteSubCategory(int Id)
+        {
+            try
+            {
+                using var connection = _context.CreateConnection();
+                var proc = "[DB01].[dbo].[DeleteSubCategoryProcedure]";
+
+                var rowsAffected = await connection.ExecuteAsync(proc, param: new { Id }, commandType: CommandType.StoredProcedure);
+
+                return rowsAffected > 0;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error deleting quiz with Id {Id}: {ex.Message}");
+                return false;
+            }
+        }
+
     }
 }

@@ -8,5 +8,6 @@ namespace ONE01.Repositories.Interfaces
         Task CreateSubCategoryAsync(SubCategory subCategory);
         Task<IEnumerable<SubCategory>> GetSubCategoryByIdAsync(int id);
         Task UpdateSubCategory(int Id, SubCategory subCategory);
+        Task<bool> DeleteSubCategory(int Id);
     }
 }

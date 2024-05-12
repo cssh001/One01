@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using ONE01.Models;
+﻿using ONE01.Models;
 using ONE01.Models.Requests;
 
 namespace ONE01.Repositories.Interfaces
@@ -10,5 +9,6 @@ namespace ONE01.Repositories.Interfaces
         Task<List<Quiz>> GetQuizById(int Id);
         Task CreateNewQuiz(GameQuiz quiz);
         Task<bool> UpdateQuiz (int Id, GameQuiz quiz);
+        Task<bool> DeleteQuiz(int id);
     }
 }

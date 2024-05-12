@@ -26,7 +26,7 @@ namespace ONE01.Controllers
             try
             {
                 _categoriesList = await _categoryRepository.GetAllCategories();
-                return Ok(new ApiResponse<Category>()
+                return Ok(new ApiResponse<List<Category>>()
                 {
                     Data = _categoriesList,
                     Total = _categoriesList.Count,
@@ -52,7 +52,7 @@ namespace ONE01.Controllers
 
                 if (categories == null)
                 {
-                    var apiResponse = new ApiResponse<Category>()
+                    var apiResponse = new ApiResponse<List<Category>>()
                     {
                         ErrorCode = EErrorCode.NotFound,
                         Message = "Categories not found",
@@ -63,7 +63,7 @@ namespace ONE01.Controllers
                 }
                 else
                 {
-                    var apiResponse = new ApiResponse<Category>()
+                    var apiResponse = new ApiResponse<List<Category>>()
                     {
                         ErrorCode = EErrorCode.Success,
                         Message = "Success",

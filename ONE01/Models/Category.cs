@@ -2,7 +2,7 @@
 {
     public class Category
     {
-        public int Id { get; set; }
+
         public int CategoryId { get; set; }
         public required string? CategoryName { get; set; }
         public string? Image { get; set; }

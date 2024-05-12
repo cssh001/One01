@@ -31,6 +31,8 @@ namespace ONE01.Repositories
                 await connection.ExecuteAsync(proc, param, commandType: CommandType.StoredProcedure);
         }
 
+       
+
         public async Task<List<Quiz>> GetAllQuiz()
         {
             try
@@ -83,6 +85,24 @@ namespace ONE01.Repositories
             catch (Exception ex)
             {
                 Console.WriteLine($"Error updating quiz with Id {Id}: {ex.Message}");
+                return false;
+            }
+        }
+
+        public async Task<bool> DeleteQuiz(int Id)
+        {
+            try
+            {
+                using var connection = context.CreateConnection();
+                var proc = "[DB01].[dbo].[DeleteQuizProcedure]";
+
+                var rowsAffected = await connection.ExecuteAsync(proc, param: new { Id }, commandType: CommandType.StoredProcedure);
+
+                return rowsAffected > 0;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error deleting quiz with Id {Id}: {ex.Message}");
                 return false;
             }
         }
