@@ -13,6 +13,7 @@ namespace ONE01.Services
             services.AddScoped<ISubCategoryRepository, SubCategoryRepository>();
             services.TryAddScoped<IQuizRepository, QuizRepository>();
             services.TryAddScoped<ICategoryRepository, CategoryRepository>();
+            services.TryAddScoped<ICourseRepository, CourseRepository>();
         }
 
         public static void ConfigureJsonOptions(this IServiceCollection services)

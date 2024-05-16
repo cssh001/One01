@@ -10,11 +10,11 @@
         "projectUniqueName": "D:\\My Projects\\QT01\\ONE01\\ONE01\\ONE01.csproj",
         "projectName": "ONE01",
         "projectPath": "D:\\My Projects\\QT01\\ONE01\\ONE01\\ONE01.csproj",
-        "packagesPath": "C:\\Users\\sengh\\.nuget\\packages\\",
+        "packagesPath": "C:\\Users\\Senghong\\.nuget\\packages\\",
         "outputPath": "D:\\My Projects\\QT01\\ONE01\\ONE01\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\sengh\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Senghong\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -45,6 +45,10 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "BCrypt.Net-Next": {
+              "target": "Package",
+              "version": "[4.0.3, )"
+            },
             "Dapper": {
               "target": "Package",
               "version": "[2.1.35, )"

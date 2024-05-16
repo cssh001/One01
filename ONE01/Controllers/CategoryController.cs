@@ -42,7 +42,6 @@ namespace ONE01.Controllers
             }
         }
 
-
         [HttpGet("{Id}")]
         public IActionResult GetCategoryById(int Id)
         {
