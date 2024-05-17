@@ -36,6 +36,7 @@ namespace ONE01.Repositories
             };
         }
 
+       
         public async Task<List<CourseResponse>> GetAllCourses()
         {
             try
@@ -50,5 +51,44 @@ namespace ONE01.Repositories
                 throw new Exception("An error occurred while retrieving courses.", ex); 
             }
         }
+
+        public async Task UpdateCourse(int Id, CourseRequest course)
+        {
+            try
+            {
+                using var connection = _context.CreateConnection();
+                string proc = "[DB01].[dbo].[UpdateCourseProcedure]";
+                var param = new
+                {
+                    Id,
+                    course.CategoryId,
+                    course.SubCategoryId,
+                    course.Title,
+                    course.Description,
+                    course.VideoLink,
+                    course.Credit
+                };
+                await connection.ExecuteAsync(proc, param: param, commandType: CommandType.StoredProcedure);
+            }
+            catch (DbException ex)
+            {
+
+            };
+        }
+        public async Task DeleteCourse(int Id)
+        {
+            try
+            {
+                using var connection = _context.CreateConnection();
+                string proc = "[DB01].[dbo].[DeleteCourseProcedure]";
+                var param = new { Id };
+                await connection.ExecuteAsync(proc, param: param, commandType: CommandType.StoredProcedure);
+            }
+            catch (DbException ex)
+            {
+
+            };
+        }
+
     }
 }

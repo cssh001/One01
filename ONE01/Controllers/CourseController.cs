@@ -65,5 +65,54 @@ namespace ONE01.Controllers
             }
 
         }
+
+        [HttpPut("{Id}")]
+        public async Task<IActionResult> UpdateCourse(int Id, CourseRequest course)
+        {
+            try
+            {
+                await _courseRepository.UpdateCourse(Id, course);
+                return Ok(new ApiResponse<EmptyResult>()
+                {
+                    ErrorCode = EErrorCode.Success,
+                    Message = "Success",
+                    Data = Empty
+                });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new ApiResponse<object>()
+                {
+                    ErrorCode = EErrorCode.ServerError,
+                    Message = "An error occurred while updating the course. Please try again later.",
+                    Data = new { Id }
+                });
+            }
+
+        }
+        [HttpDelete("{Id}")]
+        public async Task<IActionResult> DeleteCourse(int Id)
+        {
+            try
+            {
+                await _courseRepository.DeleteCourse(Id);
+                return Ok(new ApiResponse<object>()
+                {
+                    ErrorCode = EErrorCode.Success,
+                    Message = "Success",
+                    Data = new { Id}
+                });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new ApiResponse<EmptyResult>()
+                {
+                    ErrorCode = EErrorCode.ServerError,
+                    Message = "An error occurred while deleting the course. Please try again later.",
+                    Data = Empty
+                });
+            }
+
+        }
     }
 }

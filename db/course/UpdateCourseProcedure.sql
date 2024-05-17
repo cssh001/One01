@@ -4,7 +4,7 @@ CREATE OR ALTER PROC [dbo].[UpdateCourseProcedure]
     @CategoryId INT,
     @SubCategoryID INT,
     @Description NVARCHAR(MAX),
-    @Credit VARCHAR(20),
+    @Credit NVARCHAR(50),
     @VideoLink NVARCHAR(MAX),
     @Title NVARCHAR(255)
 AS
@@ -15,6 +15,7 @@ BEGIN
         [Description] = @Description,
         [Credit] = @Credit,
         [VideoLink] = @VideoLink,
-        [Title] = @Title
+        [Title] = @Title,
+        [ModifiedAt] = GETDATE()
     WHERE [Id] = @Id;
 END;

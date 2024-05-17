@@ -7,5 +7,7 @@ namespace ONE01.Repositories.Interfaces
     {
         Task CreateNewCourse(CourseRequest courseRequest);
         Task<List<CourseResponse>> GetAllCourses();
+        Task UpdateCourse(int Id, CourseRequest courseRequest);
+        Task DeleteCourse(int Id);
     }
 }
