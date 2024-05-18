@@ -50,7 +50,7 @@ namespace ONE01.Controllers
                 {
                     ErrorCode = EErrorCode.NotFound,
                     Message = "Project not found",
-                    Data = null,
+                    Data = Empty,
                 }));
             }
             return Task.FromResult<IActionResult>(Ok(new ApiResponse<List<Quiz>>
