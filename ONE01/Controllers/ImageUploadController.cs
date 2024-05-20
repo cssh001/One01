@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using ONE01.Services;
 
 namespace ONE01.Controllers
 {
@@ -40,6 +39,66 @@ namespace ONE01.Controllers
 
             return Ok( new { filePath, fileName});
         }
+
+        [HttpPost("upload/multi/{folder}")]
+        public async Task<IActionResult> UploadMulti(IFormFile[] files, int subfolder, string folder = "default")
+        {
+            if (files == null || files.Length == 0)
+            {
+                return BadRequest("No files uploaded.");
+            }
+
+            var uploadedFiles = new List<Dictionary<string, string>>();
+
+            foreach (var file in files)
+            {
+                if (file == null || file.Length == 0)
+                {
+                    continue; // Skip empty files
+                }
+
+                var fileName = Path.GetFileNameWithoutExtension(file.FileName) // Get original filename without extension
+                          + "_" + DateTime.UtcNow.ToString("yyyyMMdd_HHmmss") // Add current date/time in UTC format
+                          + Path.GetExtension(file.FileName);
+
+                var uploadFolder = Path.Combine(_environment.WebRootPath, "images\\" + folder + "\\tourst" + subfolder);
+                if (!Directory.Exists(uploadFolder))
+                {
+                    Directory.CreateDirectory(uploadFolder);
+                }
+                var filePath = Path.Combine(uploadFolder, fileName);
+
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await file.CopyToAsync(stream);
+                }
+
+                uploadedFiles.Add(new Dictionary<string, string>()
+                {
+                  { "fileName", fileName },
+                  { "filePath", filePath }
+                });
+            }
+
+            return Ok(uploadedFiles); 
+        }
+
+        [HttpDelete("delete/{filepath}")]
+        public IActionResult DeleteImage(string filepath, string filename)
+        {
+            string filePath = Path.Combine(_environment.WebRootPath, "images\\" + filepath, filename);
+
+            if (System.IO.File.Exists(filePath))
+            {
+                System.IO.File.Delete(filePath);
+                return Ok( new { Message = "Image Deleted Success as:" + filename });
+            }
+            else
+            {
+                return NotFound( new { Message = "Has no existing image for deleting" });
+            }
+        }
+
         [HttpGet("get/{folder}/{fileName}")]
         public Task<IActionResult> GetImage(string folder, string fileName)
         {
