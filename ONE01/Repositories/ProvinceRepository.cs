@@ -72,7 +72,7 @@ namespace ONE01.Repositories
 
                 using var connection = _context.CreateConnection();
                 var proc = "[DB01].[dbo].[UpdateProvinceProcedure]";
-                var param = new
+                var param = new 
                 {
                     Id,
                     request.ProvinceCode,

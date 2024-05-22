@@ -14,8 +14,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Models\Responses\NewFolder\" />
-    <Folder Include="wwwroot\" />
+    <Folder Include="wwwroot\images\cities\" />
+    <Folder Include="wwwroot\images\default\" />
+    <Folder Include="wwwroot\images\districts\" />
+    <Folder Include="wwwroot\images\provinces\" />
+    <Folder Include="wwwroot\images\TourImages\Thumbnail\" />
   </ItemGroup>
 
 </Project>

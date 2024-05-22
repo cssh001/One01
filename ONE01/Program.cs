@@ -1,3 +1,4 @@
+using Microsoft.Extensions.FileProviders;
 using ONE01.Context;
 using ONE01.Repositories;
 using ONE01.Repositories.Interfaces;
@@ -28,6 +29,8 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
+//app.UseStaticFiles();
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -43,6 +46,10 @@ app.UseCors(options =>
     options.AllowAnyMethod();
     options.AllowAnyHeader();
 });
+
+
+
+
 
 app.UseHttpsRedirection();
 
