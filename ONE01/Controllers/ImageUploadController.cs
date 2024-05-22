@@ -28,7 +28,7 @@ namespace ONE01.Controllers
                           + Path.GetExtension(file.FileName);
 
             // Combine the wwwroot/uploads folder path with the generated file name
-            var uploadFolder = Path.Combine(_environment.WebRootPath, "images\\"+ folder);
+            var uploadFolder = Path.Combine(_environment.WebRootPath, "images\\" + folder);
             var filePath = Path.Combine(uploadFolder, fileName);
 
             // Save the uploaded file to the server
@@ -37,11 +37,11 @@ namespace ONE01.Controllers
                 await file.CopyToAsync(stream);
             }
 
-            return Ok( new { filePath, fileName});
+            return Ok(new { filePath, fileName });
         }
 
         [HttpPost("upload/multi/{folder}")]
-        public async Task<IActionResult> UploadMulti(IFormFile[] files, int subfolder, string folder = "default")
+        public async Task<IActionResult> UploadMulti(IFormFile[] files, string folder)
         {
             if (files == null || files.Length == 0)
             {
@@ -61,7 +61,7 @@ namespace ONE01.Controllers
                           + "_" + DateTime.UtcNow.ToString("yyyyMMdd_HHmmss") // Add current date/time in UTC format
                           + Path.GetExtension(file.FileName);
 
-                var uploadFolder = Path.Combine(_environment.WebRootPath, "images\\" + folder + "\\tourst" + subfolder);
+                var uploadFolder = Path.Combine(_environment.WebRootPath, "images\\TourImages\\" + folder);
                 if (!Directory.Exists(uploadFolder))
                 {
                     Directory.CreateDirectory(uploadFolder);
@@ -80,7 +80,7 @@ namespace ONE01.Controllers
                 });
             }
 
-            return Ok(uploadedFiles); 
+            return Ok(uploadedFiles);
         }
 
         [HttpDelete("delete/{filepath}")]
@@ -91,18 +91,18 @@ namespace ONE01.Controllers
             if (System.IO.File.Exists(filePath))
             {
                 System.IO.File.Delete(filePath);
-                return Ok( new { Message = "Image Deleted Success as:" + filename });
+                return Ok(new { Message = "Image Deleted Success as:" + filename });
             }
             else
             {
-                return NotFound( new { Message = "Has no existing image for deleting" });
+                return NotFound(new { Message = "Has no existing image for deleting" });
             }
         }
 
         [HttpGet("get/{folder}/{fileName}")]
         public Task<IActionResult> GetImage(string folder, string fileName)
         {
-            string imagePath = Path.Combine(_environment.WebRootPath,  "images\\"+folder, fileName);
+            string imagePath = Path.Combine(_environment.WebRootPath, "images\\" + folder, fileName);
 
             // Check if the file exists
             if (!System.IO.File.Exists(imagePath))
