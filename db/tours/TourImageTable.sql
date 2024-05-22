@@ -1,0 +1,9 @@
+CREATE TABLE TourImages(
+    Id INTEGER IDENTITY(1,1) PRIMARY KEY,
+    TourId INTEGER,
+    ImageName NVARCHAR(255) NOT NULL,
+    ImageOrder INTEGER,
+)
+
+
+
