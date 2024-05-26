@@ -13,6 +13,13 @@ namespace ONE01.Controllers
             _environment = environment;
         }
 
+        private string convertFileName(string fileName)
+        {
+            return Path.GetFileNameWithoutExtension(fileName) // Get original filename without extension
+                          + "_" + DateTime.UtcNow.ToString("yyyyMMdd_HHmmss") // Add current date/time in UTC format
+                          + Path.GetExtension(fileName);
+        }
+
         [HttpPost("upload/{folder}")]
         public async Task<IActionResult> Upload(IFormFile file, string folder = "default")
         {
@@ -20,13 +27,7 @@ namespace ONE01.Controllers
             {
                 return BadRequest("No file uploaded.");
             }
-
-            // Generate a unique file name
-            //var fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
-            var fileName = Path.GetFileNameWithoutExtension(file.FileName) // Get original filename without extension
-                          + "_" + DateTime.UtcNow.ToString("yyyyMMdd_HHmmss") // Add current date/time in UTC format
-                          + Path.GetExtension(file.FileName);
-
+            var fileName = convertFileName(file.FileName);
             // Combine the wwwroot/uploads folder path with the generated file name
             var uploadFolder = Path.Combine(_environment.WebRootPath, "images\\" + folder);
             var filePath = Path.Combine(uploadFolder, fileName);
@@ -57,9 +58,7 @@ namespace ONE01.Controllers
                     continue; // Skip empty files
                 }
 
-                var fileName = Path.GetFileNameWithoutExtension(file.FileName) // Get original filename without extension
-                          + "_" + DateTime.UtcNow.ToString("yyyyMMdd_HHmmss") // Add current date/time in UTC format
-                          + Path.GetExtension(file.FileName);
+                var fileName = convertFileName(file.FileName);
 
                 var uploadFolder = Path.Combine(_environment.WebRootPath, "images\\TourImages\\" + folder);
                 if (!Directory.Exists(uploadFolder))
@@ -84,19 +83,39 @@ namespace ONE01.Controllers
         }
 
         [HttpDelete("delete/{filepath}")]
-        public IActionResult DeleteImage(string filepath, string filename)
+        public IActionResult DeleteImage(string filepath, string? filename)
         {
-            string filePath = Path.Combine(_environment.WebRootPath, "images\\" + filepath, filename);
-
-            if (System.IO.File.Exists(filePath))
+            string deleteFile;
+            if (filename != null)
             {
-                System.IO.File.Delete(filePath);
-                return Ok(new { Message = "Image Deleted Success as:" + filename });
+                deleteFile = Path.Combine(_environment.WebRootPath, "images\\" + filepath, filename);
+                if (System.IO.File.Exists(deleteFile))
+                {
+                    System.IO.File.Delete(deleteFile);
+                    return Ok(new { Message = "Image Deleted Success as:" + filename });
+                }
+                else
+                {
+                    return NotFound(new { Message = "Has no existing image for deleting" });
+                }
             }
             else
             {
-                return NotFound(new { Message = "Has no existing image for deleting" });
+                deleteFile = Path.Combine(_environment.WebRootPath, "images\\" + filepath);
+                foreach (string filePath in Directory.EnumerateFiles(deleteFile))
+                {
+                    System.IO.File.Delete(filePath);
+                }
+
             }
+            if (!Directory.Exists(deleteFile))
+            {
+                return NotFound(new { Message = "Folder not found." });
+            }
+            else
+            {
+                return Ok(new { Message = "Delete Success" });
+            }  
         }
 
         [HttpGet("get/{folder}/{fileName}")]
