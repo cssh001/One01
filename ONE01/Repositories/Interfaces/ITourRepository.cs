@@ -11,6 +11,7 @@ namespace ONE01.Repositories.Interfaces
          Task<bool> DeleteImageDetailById (int Id);
          Task<List<TourImageResponse>> GetTourImageByTourId(int TourId);
          Task CreateNewTourImage(TourImageRequest request);
+         Task<bool> DeleteTour(int Id); 
 
     }
 }

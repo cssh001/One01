@@ -187,5 +187,30 @@ namespace ONE01.Repositories
                 throw;
             }
         }
+
+        public async Task<bool> DeleteTour(int Id)
+        {
+            try
+            {
+                using var connection = _context.CreateConnection();
+                var proc = "[DB01].[dbo].[Tours_DeleteProcedure]";
+                var param = new
+                {
+                    @TourId = Id, 
+                };
+                await connection.ExecuteAsync(proc, param, commandType: CommandType.StoredProcedure);
+                return true;
+            }
+            catch (SqlException ex)
+            {
+                Console.WriteLine($"SQL Exception occurred: {ex.Message}");
+                throw;
+            }
+            catch (Exception ex)
+            {
+                Console.Error.WriteLine($"Error updating tour: {ex.Message}");
+                throw;
+            }
+        }
     }
 }

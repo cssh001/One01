@@ -138,5 +138,31 @@ namespace ONE01.Controllers
                 return StatusCode(500, "An unexpected error occurred.");
             }
         }
+        [HttpDelete("{Id}")]
+        public async Task<IActionResult> DeleteTour(int Id)
+        {
+            try
+            {
+                bool isSuccess = await _tourRepository.DeleteTour(Id);
+
+                return Ok(new ApiResponse<object>()
+                {
+                    ErrorCode = EErrorCode.Success,
+                    Message = "success",
+                    Total = 1,
+                    Data = new { isSuccess },
+                });
+            }
+            catch (SqlException ex)
+            {
+                Console.WriteLine($"SQL Exception occurred: {ex.Message}");
+                return StatusCode(500, "An error occurred while creating the tour.");
+            }
+            catch (Exception ex)
+            {
+                Console.Error.WriteLine($"Error creating tour: {ex.Message}");
+                return StatusCode(500, "An unexpected error occurred.");
+            }
+        }
     }
 }
