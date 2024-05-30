@@ -2,6 +2,7 @@
 using ONE01.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using ONE01.Models.Responses;
 
 namespace ONE01.Services
 {
@@ -17,14 +18,15 @@ namespace ONE01.Services
             services.TryAddScoped<ICityRepository, CityRepository>();
             services.TryAddScoped<IProvinceRepository, ProvinceRepository>();
             services.TryAddScoped<ITourRepository, TourRepository>();
+            services.TryAddScoped<IDistrictRepository,DistrictRepository>();
         }
 
         public static void ConfigureJsonOptions(this IServiceCollection services)
         {
             services.Configure<JsonOptions>(options =>
             {
-                options.JsonSerializerOptions.PropertyNamingPolicy = null;
-                options.JsonSerializerOptions.PropertyNameCaseInsensitive = false;
+               options.JsonSerializerOptions.PropertyNamingPolicy = null;
+               options.JsonSerializerOptions.PropertyNameCaseInsensitive = false;
             });
 
         }
